@@ -16,7 +16,7 @@ public class ResourceManager extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String sql = "CREATE TABLE \"ClienteMD\" (\n" +
+        String sql = "CREATE TABLE \"Cliente\" (\n" +
                 "\t\"id\"\tINTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,\n" +
                 "\t\"identificacion\"\tTEXT UNIQUE,\n" +
                 "\t\"nombres\"\tTEXT ,\n" +
