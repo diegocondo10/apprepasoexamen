@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">app-repaso-examen</string>
+
+    <string-array name="arrayEstCivil">
+
+        <item>Soltero</item>
+        <item>Casado</item>
+        <item>Divorciado</item>
+        <item>Viudo</item>
+        <item>Union Libre</item>
+
+    </string-array>
+
+
+</resources>

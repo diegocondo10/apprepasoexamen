@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".MainActivity">
+
+    <TextView
+        android:id="@+id/textForm"
+        android:layout_width="match_parent"
+        android:layout_height="36dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="30dp"
+        android:text="TextView"
+        android:textAlignment="center" />
+
+    <EditText
+        android:id="@+id/edtTextIdentificacion"
+        android:layout_width="264dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        android:ems="10"
+        android:hint="Identificacion"
+        android:inputType="textPersonName" />
+
+    <EditText
+        android:id="@+id/edtTextNombres"
+        android:layout_width="259dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        android:ems="10"
+        android:hint="Nombres"
+        android:inputType="textPersonName" />
+
+    <EditText
+        android:id="@+id/edtTextApellidos"
+        android:layout_width="251dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        android:ems="10"
+        android:hint="Apellidos"
+        android:inputType="textPersonName" />
+
+    <EditText
+        android:id="@+id/edtTextCorreo"
+        android:layout_width="247dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        android:ems="10"
+        android:hint="Correo"
+        android:inputType="textPersonName" />
+
+    <RadioGroup
+        android:layout_width="241dp"
+        android:layout_height="63dp"
+
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+
+        >
+
+        <RadioButton
+            android:id="@+id/radMasc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Masculino" />
+
+        <RadioButton
+            android:id="@+id/radFem"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Femenino" />
+    </RadioGroup>
+
+    <Spinner
+        android:id="@+id/spEstadoCivil"
+        android:layout_width="238dp"
+        android:layout_height="38dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        android:background="#FFC107" />
+
+    <Button
+        android:id="@+id/btnGuardar"
+        android:layout_width="243dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        android:background="#0F62A3"
+        android:text="Guardar"
+        android:textColor="#ffff" />
+
+    <Button
+        android:id="@+id/btnVerClientes"
+        android:layout_width="237dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        android:background="#0F62A3"
+        android:text="Ver Clientes"
+        android:textColor="#ffff" />
+
+</LinearLayout>
