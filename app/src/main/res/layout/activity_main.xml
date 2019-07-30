@@ -56,9 +56,9 @@
         android:inputType="textPersonName" />
 
     <RadioGroup
+        android:id="@+id/radGsexo"
         android:layout_width="241dp"
         android:layout_height="63dp"
-
         android:layout_gravity="center"
         android:layout_marginTop="20dp"
 
