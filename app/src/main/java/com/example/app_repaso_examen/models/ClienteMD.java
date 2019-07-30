@@ -1,6 +1,6 @@
 package com.example.app_repaso_examen.models;
 
-public class Cliente {
+public class ClienteMD {
 
     private int id;
     private String identificacion;
@@ -11,7 +11,7 @@ public class Cliente {
     private String estadoCivil;
 
 
-    public Cliente(int id, String identificacion, String nombres, String apellidos, String correo, String sexo, String estadoCivil) {
+    public ClienteMD(int id, String identificacion, String nombres, String apellidos, String correo, String sexo, String estadoCivil) {
         this.id = id;
         this.identificacion = identificacion;
         this.nombres = nombres;
@@ -21,7 +21,7 @@ public class Cliente {
         this.estadoCivil = estadoCivil;
     }
 
-    public Cliente() {
+    public ClienteMD() {
     }
 
     public int getId() {
@@ -82,7 +82,7 @@ public class Cliente {
 
     @Override
     public String toString() {
-        return "Cliente{" +
+        return "ClienteMD{" +
                 "id=" + id +
                 ", identificacion='" + identificacion + '\'' +
                 ", nombres='" + nombres + '\'' +
