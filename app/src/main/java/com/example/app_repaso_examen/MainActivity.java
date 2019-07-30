@@ -1,6 +1,7 @@
 package com.example.app_repaso_examen;
 
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -48,6 +49,9 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+
+    //METODOS DE APOYO
+
     private void loader() {
 
         textForm = (TextView) findViewById(R.id.textForm);
@@ -80,6 +84,17 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+
+    private void errorMSG(String message) {
+        AlertDialog builder = new AlertDialog.Builder(this)
+                .setMessage(message)
+                .setTitle("ERROR")
+                .setPositiveButton("OK", null)
+                .create();
+        builder.show();
+    }
+
+
     //EVENTOS
 
     private void btnGuardar() {
@@ -106,11 +121,11 @@ public class MainActivity extends AppCompatActivity {
             if (bd.insert(clienteMD)) {
                 System.out.println("SE HA INSERTADO EL CLIENTE");
             } else {
-                System.out.println("ERROR");
+                errorMSG("HA OCURRIDO UN ERROR CONTACTE CON EL ADMIN");
             }
 
         } catch (NullPointerException e) {
-            e.printStackTrace();
+            errorMSG("RELLENE CORRECTAMENTE EL FORMULARIO");
         }
 
 
