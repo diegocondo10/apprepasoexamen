@@ -57,5 +57,35 @@ public class ClienteBD extends ResourceManager {
         return lista;
     }
 
+    public void delete(String identificacion) {
+
+
+        SQLiteDatabase db = this.getWritableDatabase();
+
+
+        db.execSQL("DELETE FROM Cliente WHERE identificacion = '" + identificacion + "'");
+
+
+        db.close();
+
+    }
+
+    public boolean update(ClienteMD cliente, String pk) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.execSQL("UPDATE Cliente SET" +
+                " identificacion = '" + cliente.getIdentificacion() + "', \n" +
+                " nombres = '" + cliente.getNombres() + "', \n" +
+                " apellidos = '" + cliente.getApellidos() + "', \n" +
+                " correo = '" + cliente.getCorreo() + "', \n" +
+                " sexo = '" + cliente.getSexo() + "', \n" +
+                " estado_civil = '" + cliente.getEstadoCivil() + "' \n" +
+                " WHERE identificacion = '" + pk + "'");
+
+        db.close();
+
+        return true;
+
+    }
+
 
 }

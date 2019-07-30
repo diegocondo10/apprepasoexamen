@@ -32,6 +32,9 @@ public class MainActivity extends AppCompatActivity {
     private ClienteMD clienteMD;
     private ClienteBD bd;
 
+    private String action = "";
+    private String pk;
+
     {
         bd = new ClienteBD(this);
     }
@@ -41,8 +44,15 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        Bundle extras = getIntent().getExtras();
+
+        if (extras != null) {
+            action = extras.get("action").toString();
+        }
 
         loader();
+
+
         cargarSpinner();
 
         textForm.setText("INGRESO DE CLIENTES");
@@ -52,6 +62,29 @@ public class MainActivity extends AppCompatActivity {
 
 
     //METODOS DE APOYO
+
+    private ClienteMD getCliente() throws NullPointerException {
+        String identificacion = edtTextIndentificacion.getText().toString();
+        String nombres = edtTextNombres.getText().toString();
+        String apellidos = edtTextApellidos.getText().toString();
+        String correo = edtTextCorreo.getText().toString();
+
+        String sexo = (
+                (RadioButton) findViewById(radioGroup.getCheckedRadioButtonId())
+        ).getText().toString();
+
+        String estCivil = spEstCivil.getSelectedItem().toString();
+
+        clienteMD = new ClienteMD();
+        clienteMD.setIdentificacion(identificacion);
+        clienteMD.setNombres(nombres);
+        clienteMD.setApellidos(apellidos);
+        clienteMD.setCorreo(correo);
+        clienteMD.setSexo(sexo);
+        clienteMD.setEstadoCivil(estCivil);
+        return clienteMD;
+    }
+
 
     private void loader() {
 
@@ -68,7 +101,15 @@ public class MainActivity extends AppCompatActivity {
         btnVerClientes = (Button) findViewById(R.id.btnVerClientes);
 
 
-        btnGuardar.setOnClickListener(e -> btnGuardar());
+        if (action.equals("update")) {
+            btnGuardar.setOnClickListener(e -> btnUpdate());
+            pk = getIntent().getStringExtra("identificacion");
+            setForm();
+        } else {
+            btnGuardar.setOnClickListener(e -> btnInsertar());
+        }
+
+
         btnVerClientes.setOnClickListener(e -> btnVerClientes());
 
     }
@@ -85,6 +126,23 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    private void resetForm() {
+
+        edtTextIndentificacion.setText("");
+        edtTextNombres.setText("");
+        edtTextApellidos.setText("");
+        edtTextCorreo.setText("");
+        spEstCivil.setSelection(0);
+
+    }
+
+    private void setForm() {
+        edtTextIndentificacion.setText(getIntent().getStringExtra("identificacion"));
+        edtTextNombres.setText(getIntent().getStringExtra("nombres"));
+        edtTextApellidos.setText(getIntent().getStringExtra("apellidos"));
+        edtTextCorreo.setText(getIntent().getStringExtra("correo"));
+
+    }
 
     private void errorMSG(String message) {
         AlertDialog builder = new AlertDialog.Builder(this)
@@ -98,29 +156,12 @@ public class MainActivity extends AppCompatActivity {
 
     //EVENTOS
 
-    private void btnGuardar() {
+    private void btnInsertar() {
         try {
-            String identificacion = edtTextIndentificacion.getText().toString();
-            String nombres = edtTextNombres.getText().toString();
-            String apellidos = edtTextApellidos.getText().toString();
-            String correo = edtTextCorreo.getText().toString();
 
-            String sexo = (
-                    (RadioButton) findViewById(radioGroup.getCheckedRadioButtonId())
-            ).getText().toString();
-
-            String estCivil = spEstCivil.getSelectedItem().toString();
-
-            clienteMD = new ClienteMD();
-            clienteMD.setIdentificacion(identificacion);
-            clienteMD.setNombres(nombres);
-            clienteMD.setApellidos(apellidos);
-            clienteMD.setCorreo(correo);
-            clienteMD.setSexo(sexo);
-            clienteMD.setEstadoCivil(estCivil);
-
-            if (bd.insert(clienteMD)) {
+            if (bd.insert(getCliente())) {
                 btnVerClientes();
+                resetForm();
             } else {
                 errorMSG("HA OCURRIDO UN ERROR CONTACTE CON EL ADMIN");
             }
@@ -130,6 +171,21 @@ public class MainActivity extends AppCompatActivity {
         }
 
 
+    }
+
+    private void btnUpdate() {
+        try {
+
+            if (bd.update(getCliente(), pk)) {
+                btnVerClientes();
+                resetForm();
+            } else {
+                errorMSG("HA OCURRIDO UN ERROR CONTACTE CON EL ADMIN");
+            }
+
+        } catch (NullPointerException e) {
+            errorMSG("RELLENE CORRECTAMENTE EL FORMULARIO");
+        }
     }
 
     private void btnVerClientes() {
