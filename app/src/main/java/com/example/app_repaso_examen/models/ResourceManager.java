@@ -26,6 +26,13 @@ public class ResourceManager extends SQLiteOpenHelper {
                 "\t\"estado_civil\"\tTEXT \n" +
                 ");";
 
+        System.out.println("=======================================================================");
+        System.out.println("=====================SE HA CREADO LA BASE DE DATOS=====================");
+        System.out.println("=======================================================================");
+        System.out.println(sql);
+        System.out.println("=======================================================================");
+        System.out.println("=======================================================================");
+
         db.execSQL(sql);
 
     }

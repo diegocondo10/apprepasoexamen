@@ -2,7 +2,7 @@ package com.example.app_repaso_examen;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
@@ -10,27 +10,40 @@ import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.example.app_repaso_examen.models.ClienteBD;
+import com.example.app_repaso_examen.models.ClienteMD;
+
 public class MainActivity extends AppCompatActivity {
 
+    //Variables de componentes
+    private TextView textForm;
+    private EditText edtTextIndentificacion;
+    private EditText edtTextNombres;
+    private EditText edtTextApellidos;
+    private EditText edtTextCorreo;
+    private RadioGroup radioGroup;
+    private Spinner spEstCivil;
+    private Button btnGuardar;
+    private Button btnVerClientes;
 
-    TextView textForm;
-    EditText edtTextIndentificacion;
-    EditText edtTextNombres;
-    EditText edtTextApellidos;
-    EditText edtTextCorreo;
+    //Varaibles de datos
+    private ClienteMD clienteMD;
+    private ClienteBD bd;
 
-    RadioGroup radioGroup;
-    RadioButton radSexo;
-
-    Spinner spEstCivil;
-    Button btnGuardar;
-    Button btnVerClientes;
-
+    {
+        bd = new ClienteBD(this);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+
+        loader();
+        cargarSpinner();
+
+        textForm.setText("INGRESO DE CLIENTES");
 
 
     }
@@ -50,18 +63,60 @@ public class MainActivity extends AppCompatActivity {
         btnVerClientes = (Button) findViewById(R.id.btnVerClientes);
 
 
-        btnGuardar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                
-            }
-        });
+        btnGuardar.setOnClickListener(e -> btnGuardar());
+        btnVerClientes.setOnClickListener(e -> btnVerClientes());
+
+    }
+
+
+    private void cargarSpinner() {
+
+        ArrayAdapter<CharSequence> estCivil = ArrayAdapter.createFromResource(this, R.array.arrayEstCivil, android.R.layout.simple_spinner_item);
+
+        estCivil.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        spEstCivil.setAdapter(estCivil);
 
 
     }
 
-    private void cargarSpinner() {
+    //EVENTOS
 
+    private void btnGuardar() {
+        try {
+            String identificacion = edtTextIndentificacion.getText().toString();
+            String nombres = edtTextNombres.getText().toString();
+            String apellidos = edtTextApellidos.getText().toString();
+            String correo = edtTextCorreo.getText().toString();
+
+            String sexo = (
+                    (RadioButton) findViewById(radioGroup.getCheckedRadioButtonId())
+            ).getText().toString();
+
+            String estCivil = spEstCivil.getSelectedItem().toString();
+
+            clienteMD = new ClienteMD();
+            clienteMD.setIdentificacion(identificacion);
+            clienteMD.setNombres(nombres);
+            clienteMD.setApellidos(apellidos);
+            clienteMD.setCorreo(correo);
+            clienteMD.setSexo(sexo);
+            clienteMD.setEstadoCivil(estCivil);
+
+            if (bd.insert(clienteMD)) {
+                System.out.println("SE HA INSERTADO EL CLIENTE");
+            } else {
+                System.out.println("ERROR");
+            }
+
+        } catch (NullPointerException e) {
+            e.printStackTrace();
+        }
+
+
+    }
+
+    private void btnVerClientes() {
     }
 
 

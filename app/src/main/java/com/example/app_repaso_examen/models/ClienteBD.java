@@ -6,7 +6,7 @@ import android.database.sqlite.SQLiteDatabase;
 
 public class ClienteBD extends ResourceManager {
 
-    ClienteBD(Context context) {
+    public ClienteBD(Context context) {
         super(context);
     }
 
