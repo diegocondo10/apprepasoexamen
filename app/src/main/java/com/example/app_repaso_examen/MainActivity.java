@@ -1,5 +1,6 @@
 package com.example.app_repaso_examen;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -119,7 +120,7 @@ public class MainActivity extends AppCompatActivity {
             clienteMD.setEstadoCivil(estCivil);
 
             if (bd.insert(clienteMD)) {
-                System.out.println("SE HA INSERTADO EL CLIENTE");
+                btnVerClientes();
             } else {
                 errorMSG("HA OCURRIDO UN ERROR CONTACTE CON EL ADMIN");
             }
@@ -132,6 +133,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void btnVerClientes() {
+        Intent intent = new Intent(this, ListaClientes.class);
+        startActivity(intent);
     }
 
 
